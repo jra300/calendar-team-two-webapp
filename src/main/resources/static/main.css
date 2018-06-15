@@ -284,3 +284,59 @@
             margin-bottom: 0px;
             resize: vertical;
         }
+        
+    h1:hover {
+        color: blue;
+        /* outline: 1px solid red; */
+    }
+
+    h2:hover {
+        color: white;
+        background: orange
+        /* outline: 1px solid red; */
+    }
+
+    p:hover {
+        color: dodgerblue;
+        /* outline: 1px solid red; */
+    }
+
+    label:hover {
+        color: dodgerblue;
+        /* outline: 1px solid red; */
+    }
+
+    .leftcolumn:hover {
+        color: dodgerblue;
+        /* outline: 1px solid red; */
+    }
+
+    input {
+        background: lightblue;
+        outline: 1px solid orange;
+    }
+
+    label {
+        background: lightblue;
+        outline: 1px solid orange;
+    }
+
+    .subject {
+        background: lightblue;
+        outline: 1px solid orange;
+    }
+
+    .country {
+        background: lightblue;
+        outline: 1px solid orange;
+    }
+
+    textarea {
+        background: lightblue;
+        outline: 1px solid orange;
+    }
+
+    select {
+        background: lightblue;
+        outline: 1px solid orange;
+    }

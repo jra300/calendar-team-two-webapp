@@ -136,7 +136,9 @@ function myMap() {
             '11/11': "Veteran's Day",
             '12/24': "Christmas Eve",
             '12/25': "Christmas Day",
-            '12/31': "New Year's Eve"
+            '12/31': "New Year's Eve",
+            '10/06': "Appiah's Birthday",
+            '10/09': "John's Birthday"
         },
         'W': { //Month, Week of Month, Day of Week
             '1/3/1': "Martin Luther King Jr. Day",

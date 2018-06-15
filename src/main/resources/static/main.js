@@ -223,6 +223,7 @@ function loadDates() {
             //grays out the dates not in this month
             if (weeks[i][j].format('M') != month) {
                 li.setAttribute("style", "color: grey; font-style: italic;");
+                li.style.backgroundColor = "lightgrey";
             }
 
             if (moment(weeks[i][j]).holiday() != undefined) {

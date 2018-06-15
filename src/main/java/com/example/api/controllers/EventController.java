@@ -32,7 +32,7 @@ public class EventController {
     }
 	
 	@GetMapping("/events/date/{date}")
-    public List<Event> getEventByDate(@PathVariable String date) {
+    public List<Event> getEventsByDate(@PathVariable String date) {
 		return eventRepository.findAllByDateOrderByIdAsc(date);
     }
 	

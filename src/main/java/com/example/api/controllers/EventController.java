@@ -31,6 +31,11 @@ public class EventController {
         return eventRepository.findAllByOrderByIdAsc();
     }
 	
+	@GetMapping("/events/date/{date}")
+    public List<Event> getEventByDate(@PathVariable String date) {
+		return eventRepository.findAllByDateOrderByIdAsc(date);
+    }
+	
     @PostMapping("/events")
     public Event create(@RequestBody Map<String, String> body){
         String date = body.get("date");

@@ -11,5 +11,6 @@ import com.example.api.models.Event;
 public interface EventRepository extends JpaRepository<Event, Integer> {
     List<Event> findByDateContaining(String text);
     List<Event> findAllByOrderByIdAsc();
+    List<Event> findAllByDateOrderByIdAsc(String date);
 }
     

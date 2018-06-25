@@ -1,4 +1,4 @@
-package com.example.api.controllers;
+package com.teamtwo.calendar.controllers;
 
 import java.util.List;
 import java.util.Map;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.example.api.models.Event;
-import com.example.api.repositories.EventRepository;
+import com.teamtwo.calendar.models.Event;
+import com.teamtwo.calendar.repositories.EventRepository;
 
 @RestController
 @CrossOrigin("*")

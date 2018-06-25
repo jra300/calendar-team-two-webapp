@@ -97,7 +97,7 @@ window.onload = function () {
 }
 
 function getEvents() {
-    axios.get('http://localhost:8090/events')
+    axios.get('http://localhost:8050/events')
         .then(function (response) {
             events = response['data'];
             loadDates();
@@ -223,7 +223,6 @@ function loadDates() {
             //grays out the dates not in this month
             if (weeks[i][j].format('M') != month) {
                 li.setAttribute("style", "color: grey; font-style: italic;");
-                li.style.backgroundColor = "lightgrey";
             }
 
             if (moment(weeks[i][j]).holiday() != undefined) {
@@ -243,22 +242,32 @@ function create(event) {
     let textInput = document.getElementById("textInput");
     let timeInput = document.getElementById("timeInput");
     let eventForm = document.getElementById("event-form");
-
-    axios.post('http://localhost:8090/events', {
-        date: eventForm.value,
-        time: timeInput.value,
-        text: textInput.value
-    })
-        .then(function (response) {
-            getEvents();
-            eventForm.classList.add("inactive");
-            eventForm.classList.remove("active");
-            textInput.value = "";
-            timeInput.value = "";
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    
+    let token = document.querySelector('meta[name="_csrf"]')['content'];
+    let header_name = document.querySelector('meta[name="_csrf_header"]')['content'];
+    
+    axios({
+        method: 'post',
+        url: 'http://localhost:8050/events',
+        data: {
+            date: eventForm.value,
+            time: timeInput.value,
+            text: textInput.value
+        },
+        headers: {
+           'X-CSRF-TOKEN': token 
+       }
+   })
+   .then(function (response) {
+       getEvents();
+       eventForm.classList.add("inactive");
+       eventForm.classList.remove("active");
+       textInput.value = "";
+       timeInput.value = "";
+   })
+   .catch(function (error) {
+       console.log(error);
+   });
 
 }
 

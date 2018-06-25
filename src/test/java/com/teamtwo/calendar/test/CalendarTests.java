@@ -1,4 +1,4 @@
-package com.example.api;
+package com.teamtwo.calendar.test;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,17 +19,18 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-import com.example.api.configuration.SecurityConfiguration;
-import com.example.api.controllers.EventController;
-import com.example.api.models.Event;
-import com.example.api.repositories.EventRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.teamtwo.calendar.Calendar;
+import com.teamtwo.calendar.configuration.SecurityConfiguration;
+import com.teamtwo.calendar.controllers.EventController;
+import com.teamtwo.calendar.models.Event;
+import com.teamtwo.calendar.repositories.EventRepository;
 
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(EventController.class)
-@ContextConfiguration(classes={ApiApplication.class, SecurityConfiguration.class})
-public class ApiApplicationTests {
+@ContextConfiguration(classes={Calendar.class, SecurityConfiguration.class})
+public class CalendarTests {
 
 	@Autowired
 	private MockMvc mvc;

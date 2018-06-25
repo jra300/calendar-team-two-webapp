@@ -1,4 +1,4 @@
-package com.example.api.models;
+package com.teamtwo.calendar.models;
 
 import javax.persistence.*;
 

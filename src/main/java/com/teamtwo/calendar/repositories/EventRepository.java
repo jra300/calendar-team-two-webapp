@@ -1,11 +1,11 @@
-package com.example.api.repositories;
+package com.teamtwo.calendar.repositories;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.api.models.Event;
+import com.teamtwo.calendar.models.Event;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Integer> {
@@ -13,4 +13,3 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     List<Event> findAllByOrderByIdAsc();
     List<Event> findAllByDateOrderByIdAsc(String date);
 }
-    

@@ -1,4 +1,4 @@
-package com.example.api.controllers;
+package com.teamtwo.calendar.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -26,49 +26,43 @@ import com.teamtwo.calendar.controllers.EventController;
 import com.teamtwo.calendar.models.Event;
 import com.teamtwo.calendar.repositories.EventRepository;
 
-
 @RunWith(SpringRunner.class)
 @WebMvcTest(EventController.class)
-@ContextConfiguration(classes={Calendar.class, SecurityConfiguration.class})
+@ContextConfiguration(classes = { Calendar.class, SecurityConfiguration.class })
 public class CalendarTests {
 
-	@Autowired
-	private MockMvc mvc;
-	
-	@Autowired
-	private ObjectMapper objectMapper;
-	
-	@MockBean
-	private EventRepository eventRepository;
-	
-	@Test
-	public void contextLoads() {
-	}
-	
-	@Test
-	public void returnsEmployeeAsJson() throws Exception {
-		Event event = new Event("date", "time", "text");
-		
-		List<Event> allEvents = Arrays.asList(event);
-		
-		given(eventRepository.findAll()).willReturn(allEvents);
-		
-		mvc.perform(get("/events")
-				.contentType(MediaType.APPLICATION_JSON))
-		        .andExpect(status().isOk())
-		        .andExpect(jsonPath("$", hasSize(1)))
-		        .andExpect(jsonPath("$[0].date", is(event.getDate())));
-	}
-	
-	@Test
-	public void postsEmployee() throws Exception {
-		Event event = new Event("date1", "time1", "text1");
-		String requestJson = objectMapper.writeValueAsString(event);
-		
-		mvc.perform(post("/events")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(requestJson))
+    @Autowired
+    private MockMvc mvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @MockBean
+    private EventRepository eventRepository;
+
+    @Test
+    public void contextLoads() {
+    }
+
+    @Test
+    public void returnsEmployeeAsJson() throws Exception {
+        Event event = new Event("date", "time", "text");
+
+        List<Event> allEvents = Arrays.asList(event);
+
+        given(eventRepository.findAll()).willReturn(allEvents);
+
+        mvc.perform(get("/events").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].date", is(event.getDate())));
+    }
+
+    @Test
+    public void postsEmployee() throws Exception {
+        Event event = new Event("date1", "time1", "text1");
+        String requestJson = objectMapper.writeValueAsString(event);
+
+        mvc.perform(post("/events").contentType(MediaType.APPLICATION_JSON).content(requestJson))
                 .andExpect(status().isOk());
-	}
+    }
 
 }

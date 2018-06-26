@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Calendar {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Calendar.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Calendar.class, args);
+    }
 }

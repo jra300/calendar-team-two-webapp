@@ -106,6 +106,25 @@ function getEvents() {
         });
 }
 
+function deleteEvents() {
+let token = document.querySelector('meta[name="_csrf"]')['content'];
+    let header_name = document.querySelector('meta[name="_csrf_header"]')['content'];
+      axios({
+        method: 'delete',
+        url: 'http://localhost:8050/events',
+        headers: {
+           'X-CSRF-TOKEN': token 
+       }
+   })
+        .then(function (response) {
+            //events = response['data'];
+            getEvents();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
 function resetToPresent() {
     month = moment().month() + 1;
     year = moment().year();

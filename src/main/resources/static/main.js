@@ -3,28 +3,26 @@ let month = moment().month() + 1; //months are zero-indexed
 let year = moment().year();
 let today = moment().date();
 let events = {};
-
 const ENTER_KEY = 13;
-let input;
-var jsalarm;
 
 var alarm = new Audio("http://soundbible.com/grab.php?id=2197&type=mp3");
-
-window.onload = function () {
-    input = document.getElementById("textInput");
+window.addEventListener('load', load, false);
+    
+function load() {
+    let input = document.getElementById("textInput");
 
     input.addEventListener("keydown", function (event) {
         if (event.keyCode === ENTER_KEY) {
             create();
         }
     });
-
+    
     //http://www.javascriptkit.com/script/script2/alarm.shtml
     var jsalarm = {
-        padfield: function (f) {
+        padfield: function(f) {
             return (f < 10) ? "0" + f : f
         },
-        showcurrenttime: function () {
+        showcurrenttime: function() {
             var dateobj = new Date()
             var ct = this.padfield(dateobj.getHours()) + ":" + this.padfield(dateobj.getMinutes()) + ":" + this.padfield(dateobj.getSeconds())
             this.ctref.innerHTML = ct
@@ -34,28 +32,29 @@ window.onload = function () {
                     clearInterval(jsalarm.timer)
 
                     alarm.play()
+                    alert("Check Your Calendar")
                 }
             }
         },
-        init: function () {
+        init: function() {
             var dateobj = new Date()
             this.ctref = document.getElementById("jsalarm_ct")
             this.submitref = document.getElementById("submitbutton")
-            this.submitref.onclick = function () {
+            this.submitref.onclick = function() {
                 jsalarm.setalarm()
                 this.value = "Alarm Set"
                 this.disabled = true
                 return false
             }
             this.resetref = document.getElementById("resetbutton")
-            this.resetref.onclick = function () {
+            this.resetref.onclick = function() {
                 jsalarm.submitref.disabled = false
                 jsalarm.hourwake = undefined
                 jsalarm.hourselect.disabled = false
                 jsalarm.minuteselect.disabled = false
                 jsalarm.secondselect.disabled = false
                 jsalarm.showcurrenttime()
-                jsalarm.timer = setInterval(function () {
+                jsalarm.timer = setInterval(function() {
                     jsalarm.showcurrenttime()
                 }, 1000)
 
@@ -79,11 +78,11 @@ window.onload = function () {
 
             }
             jsalarm.showcurrenttime()
-            jsalarm.timer = setInterval(function () {
+            jsalarm.timer = setInterval(function() {
                 jsalarm.showcurrenttime()
             }, 1000)
         },
-        setalarm: function () {
+        setalarm: function() {
             this.hourwake = this.hourselect.options[this.hourselect.selectedIndex].value
             this.minutewake = this.minuteselect.options[this.minuteselect.selectedIndex].value
             this.secondwake = this.secondselect.options[this.secondselect.selectedIndex].value
@@ -92,7 +91,7 @@ window.onload = function () {
             this.secondselect.disabled = true
         },
     }
-
+    
     jsalarm.init();
 }
 
@@ -165,7 +164,6 @@ function myMap() {
     if ((typeof module !== "undefined" && module !== null ? module.exports : void 0) != null) {
         module.exports = moment;
     }
-
 }(this));
 
 function loadDates() {
@@ -216,7 +214,9 @@ function loadDates() {
             //adds the events to the date
             for (let i = 0; i < events.length; i++) {
                 if (span.value.format("MMMM DD YYYY") == moment(events[i].date).format("MMMM DD YYYY")) {
+                    span.id = i;
                     span.innerHTML = span.innerHTML + events[i].time + ": " + events[i].text + "<br />";
+                    //console.log(span.id);
                 }
             }
 

@@ -107,7 +107,7 @@ function getEvents() {
 }
 
 function deleteEvents() {
-let token = document.querySelector('meta[name="_csrf"]')['content'];
+    let token = document.querySelector('meta[name="_csrf"]')['content'];
     let header_name = document.querySelector('meta[name="_csrf_header"]')['content'];
       axios({
         method: 'delete',
@@ -115,7 +115,7 @@ let token = document.querySelector('meta[name="_csrf"]')['content'];
         headers: {
            'X-CSRF-TOKEN': token 
        }
-   })
+       })
         .then(function (response) {
             //events = response['data'];
             getEvents();

@@ -1,342 +1,327 @@
-    * {
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#reset {
+    font-size: smaller;
+}
+
+.mapouter {
+    text-align: right;
+    height: 500px;
+    width: 600px;
+}
+
+.gmap_canvas {
+    overflow: hidden;
+    background: none !important;
+    height: 500px;
+    width: 600px;
+}
+
+#event-form {
+    display: none;
+    box-shadow: 0 2px 4px #3483;
+    position: fixed;
+    width: 300px;
+    transform: translate(-50%, -100%);
+    z-index: 10;
+    padding: 1rem;
+    background-color: white;
+    border: 1px #3483 solid;
+    flex-direction: column;
+    align-content: space-between;
+}
+
+#event-form.active {
+    display: flex;
+}
+
+#event-form h4 {
+    margin: 0 0 0.75rem 0;
+    color: gray;
+    font-weight: normal;
+    font-size: 1.15rem;
+}
+
+#event-form p {
+    font-size: 0.85rem;
+    margin: 0 0 0.85rem 0;
+}
+
+#event-form>* {
+    width: 100%;
+}
+
+#event-form .text {
+    margin-bottom: 0.75rem;
+}
+
+#event-form .text input[type=text] {
+    width: calc(100% - 0.75rem);
+    padding: 0.25rem;
+    font-size: 0.75rem;
+}
+
+#event-form .buttons {
+    text-align: right;
+}
+
+#event-form .buttons button {
+    padding: 0.5rem;
+    background-color: blue;
+    border: 1px solid gray;
+    font-weight: bold;
+    border-radius: 2px;
+    color: white;
+}
+
+#event-form .buttons button:focus {
+    outline: none;
+}
+
+#event-form .buttons button:hover {
+    background-color: #1414ff;
+    border: 1px solid blue;
+}
+
+#event-form #close-button {
+    margin: 0;
+    padding: 0;
+    font-size: 1.25rem;
+    background-color: white;
+    position: absolute;
+    border: none;
+    width: 20px;
+    font-weight: bold;
+    color: #666;
+    right: 0.6rem;
+    top: 0.6rem;
+    cursor: pointer;
+}
+
+#event-form #close-button:focus {
+    outline: none;
+}
+
+.header {
+    padding: 50px;
+    width: 100%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+
+/*changed padding to 10px for both to make calendar header smaller */
+
+.month {
+    padding: 10px 10px;
+    width: 100%;
+    background: #373737;
+}
+
+.month ul {
+    margin: 0;
+    padding: 0;
+}
+
+
+/*changed padding-top to 10px to make calendar header smaller */
+
+.month ul li {
+    color: white;
+    font-family: Roboto, Charcoal, sans-serif;
+    letter-spacing: 5px;
+    font-size: 60px;
+    padding-top: 2px;
+    text-transform: uppercase;
+}
+
+.month .prev {
+    float: left;
+    padding: 10px;
+    if(month==December) {
+        style background-color: white;
     }
+}
 
-    #reset {
-        font-size: smaller;
-    }
+.month .next {
+    float: right;
+    padding: 10px;
+}
 
-    .mapouter {
-        text-align: right;
-        height: 500px;
-        width: 600px;
-    }
+#day-bar {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 10px 0;
+    background-color: #ddd;
+    width: 100%;
+}
 
-    .gmap_canvas {
-        overflow: hidden;
-        background: none !important;
-        height: 500px;
-        width: 600px;
-    }
+#day-bar div {
+    display: inline-block;
+    width: 14.2857%;
+    color: rgb(63, 63, 62);
+    text-align: center;
+    font-size: 20px;
+}
 
-    #event-form {
-        display: none;
-        box-shadow: 0 2px 4px #3483;
-        position: fixed;
-        width: 300px;
-        transform: translate(-50%, -100%);
-        z-index: 10;
-        padding: 1rem;
-        background-color: white;
-        border: 1px #3483 solid;
-        flex-direction: column;
-        align-content: space-between;
-    }
+.days {
+    padding: .9px 0px;
+    background: white;
+    margin: 0;
+}
 
-    #event-form.active {
-        display: flex;
-    }
+.days li {
+    overflow: auto;
+    display: inline-block;
+    height: 100px;
+    width: 14.2857%;
+    text-align: center;
+    font-size: 20px;
+    color: black;
+    border: 1px solid;
+    padding: 20px;
+}
 
-    #event-form h4 {
-        margin: 0 0 0.75rem 0;
-        color: gray;
-        font-weight: normal;
-        font-size: 1.15rem;
-    }
+.days li:hover {
+    background-color: #6D7993;
+    color: white !important;
+}
 
-    #event-form p {
-        font-size: 0.85rem;
-        margin: 0 0 0.85rem 0;
-    }
+.days span.active {
+    padding: 5px;
+    background: #1adc9c;
+    color: white;
+}
 
-    #event-form>* {
-        width: 100%;
-    }
 
-    #event-form .text {
-        margin-bottom: 0.75rem;
-    }
+/* Style inputs */
 
-    #event-form .text input[type=text] {
-        width: calc(100% - 0.75rem);
-        padding: 0.25rem;
-        font-size: 0.75rem;
-    }
+input[type=text],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
 
-    #event-form .buttons {
-        text-align: right;
-    }
+reset {
+    float: bottom;
+}
 
-    #event-form .buttons button {
-        padding: 0.5rem;
-        background-color: blue;
-        border: 1px solid gray;
-        font-weight: bold;
-        border-radius: 2px;
-        color: white;
-    }
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+}
 
-    #event-form .buttons button:focus {
-        outline: none;
-    }
+input[type=submit]:hover {
+    background-color: #45a049;
+}
 
-    #event-form .buttons button:hover {
-        background-color: #1414ff;
-        border: 1px solid blue;
-    }
 
-    #event-form #close-button {
-        margin: 0;
-        padding: 0;
-        font-size: 1.25rem;
-        background-color: white;
-        position: absolute;
-        border: none;
-        width: 20px;
-        font-weight: bold;
-        color: #666;
-        right: 0.6rem;
-        top: 0.6rem;
-        cursor: pointer;
-    }
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 
-    #event-form #close-button:focus {
-        outline: none;
-    }
-
-    .header {
-        padding: 50px;
-        width: 100%;
-    }
-
-    ul {
-        list-style-type: none;
-    }
-
-    .month {
-        padding: 50px 25px;
-        width: 100%;
-        background: #ef4f69;
-    }
-
-    .month ul {
-        margin: 0;
-        padding: 0;
-    }
-
-    .month ul li {
-        color: white;
-        font-family: Impact, Charcoal, sans-serif;
-        letter-spacing: 5px;
-        font-size: 40px;
-        padding-top: 20px;
-        text-transform: uppercase;
-    }
-
-    .month .prev {
-        float: left;
-        padding: 10px;
-        if(month==December) {
-            style background-color: white;
-        }
-    }
-
-    .month .next {
-        float: right;
-        padding: 10px;
-    }
-
-    #day-bar {
-        display: flex;
-        justify-content: flex-start;
-        margin: 0;
-        padding: 10px 0;
-        background-color: #ddd;
-        width: 100%;
-    }
-
-    #day-bar div {
-        display: inline-block;
-        width: 14.2857%;
-        color: rgb(63, 63, 62);
-        text-align: center;
-        font-size: 20px;
-    }
-
-    .days {
-        padding: .9px 0px;
-        background: white;
-        margin: 0;
-    }
-
-    .days li {
-        overflow: auto;
-        display: inline-block;
-        height: 100px;
-        width: 14.2857%;
-        text-align: center;
-        font-size: 20px;
-        color: black;
-        border: 1px solid;
-        padding: 20px;
-    }
-
-    .days li:hover {
-        background-color: #ef4f69;
-        color: white !important;
-    }
-
-    .days span.active {
-        padding: 5px;
-        background: #1adc9c;
-        color: white;
-    }
-
-    /* Style inputs */
-
-    input[type=text],
-    select,
-    textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        margin-top: 6px;
-        margin-bottom: 16px;
-        resize: vertical;
-    }
-
+@media screen and (max-width: 600px) {
+    .column,
     input[type=submit] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        cursor: pointer;
+        width: 100%;
+        margin-top: 0;
     }
+}
 
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
+#jsalarmclock {
+    font-family: Tahoma;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px;
+}
 
-    /* Style the container/contact section */
+#jsalarmclock div {
+    margin-bottom: 0.8em;
+}
 
-    .container {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 10px;
-    }
+#jsalarmclock div.leftcolumn {
+    float: left;
+    width: 150px;
+    height: 15px;
+    font-size: 12px;
+    background-color: lightyellow;
+}
 
-    /* Create two columns that float next to eachother */
+#jsalarmclock span {
+    margin-right: 5px;
+}
 
-    .column {
-        float: left;
-        width: 50%;
-        margin-top: 6px;
-        padding: 20px;
-    }
+h1:hover {
+    color: blue;
+    /* outline: 1px solid red; */
+}
 
-    /* Clear floats after the columns */
+h2:hover {
+    color: white;
+    background: orange
+    /* outline: 1px solid red; */
+}
 
-    .row:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
+p:hover {
+    color: dodgerblue;
+    /* outline: 1px solid red; */
+}
 
-    /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+label:hover {
+    color: dodgerblue;
+    /* outline: 1px solid red; */
+}
 
-    @media screen and (max-width: 600px) {
-        .column,
-        input[type=submit] {
-            width: 100%;
-            margin-top: 0;
-        }
-    }
+.leftcolumn:hover {
+    color: dodgerblue;
+    /* outline: 1px solid red; */
+}
 
-    #jsalarmclock {
-        font-family: Tahoma;
-        font-weight: bold;
-        font-size: 12px;
-        padding: 10px;
-    }
+input {
+    background: lightblue;
+    outline: 1px solid orange;
+}
 
-    #jsalarmclock div {
-        margin-bottom: 0.8em;
-    }
+label {
+    background: lightblue;
+    outline: 1px solid orange;
+}
 
-    #jsalarmclock div.leftcolumn {
-        float: left;
-        width: 150px;
-        font-size: 13px;
-        background-color: lightyellow;
-        clear: left;
-    }
+.subject {
+    background: lightblue;
+    outline: 1px solid orange;
+}
 
-    #jsalarmclock span {
-        margin-right: 5px;
-    }
+.country {
+    background: lightblue;
+    outline: 1px solid orange;
+}
 
-    .alarmSelect {
-        width: 10%;
-        padding: 0px;
-        border: 1px solid #ccc;
-        margin-top: 0px;
-        margin-bottom: 0px;
-        resize: vertical;
-    }
+textarea {
+    background: lightblue;
+    outline: 1px solid orange;
+}
 
-    h1:hover {
-        color: blue;
-        /* outline: 1px solid red; */
-    }
-
-    h2:hover {
-        color: white;
-        background: orange
-        /* outline: 1px solid red; */
-    }
-
-    p:hover {
-        color: dodgerblue;
-        /* outline: 1px solid red; */
-    }
-
-    label:hover {
-        color: dodgerblue;
-        /* outline: 1px solid red; */
-    }
-
-    .leftcolumn:hover {
-        color: dodgerblue;
-        /* outline: 1px solid red; */
-    }
-
-    input {
-        background: lightblue;
-        outline: 1px solid orange;
-    }
-
-    label {
-        background: lightblue;
-        outline: 1px solid orange;
-    }
-
-    .subject {
-        background: lightblue;
-        outline: 1px solid orange;
-    }
-
-    .country {
-        background: lightblue;
-        outline: 1px solid orange;
-    }
-
-    textarea {
-        background: lightblue;
-        outline: 1px solid orange;
-    }
-
-    select {
-        background: lightblue;
-        outline: 1px solid orange;
-    }
+select {
+    color: black;
+    width: 10%;
+    height: 25px;
+    padding: 0px;
+    border: 1px solid #ccc;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    resize: vertical;
+    background: lightblue;
+    outline: 1px solid orange;
+}

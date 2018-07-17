@@ -3,48 +3,59 @@
 <html>
 
 <head>
+    <!--References for JS and CSS. 
+    Links to materialize -->
     <title>ITTP Team Two Calendar</title>
-    <link type="text/css" rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link type="text/css" rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script type="text/javascript" src="/main.js"></script>
-    
-    <meta name="_csrf" th:content="${_csrf.token}"/>
-    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="main.js"></script>
+
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
 </head>
 
 <body onload="getEvents()">
     <div style="background-color:rgb(255, 255, 255)" class="header">
-        <h1 id="headerText" style="display:block;" title="Welcome to Team2 User-friendly Calendar">ITTP Team Two Calendar</h1>
+        <h1 class="center-align">ITTP Team Two Calendar</h1>
         <div>
-            <a href="/logout">Logout</a>
-            <iframe style="display:block;" src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=small&timezone=America%2FNew_York"
-                height="90" frameborder="0"></iframe>
+            <!--<a href="/logout">Logout</a>-->
+            <iframe style="display:block;" src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=small&timezone=America%2FNew_York" height="90" frameborder="0"></iframe>
         </div>
     </div>
+
+    <!--Cycle buttons for changing years and months-->
     <div class="month">
         <ul>
             <li onclick="decrementYear()" class="prev">
-                <button type="button" id="myBtn1" style="background-color: lightblue">Prev Year</button>
+                <a class="waves-effect waves-purple blue btn">
+                    <i class="material-icons left">arrow_back</i>Prev Year</a>
             </li>
             <li onclick="decrementMonth()" class="prev">
-                <button type="button" id="myBtn2" style="background-color: floralwhite">Prev Month </button>
+                <a class="waves-effect waves-purple blue-grey darken-2 btn">
+                    <i class="material-icons left">arrow_back</i>Prev Month</a>
             </li>
             <li onclick="incrementYear()" class="next">
-                <button type="button" id="myBtn3" style="background-color: lightblue">Next Year</button>
+                <a class="waves-effect waves-purple blue btn">
+                    <i class="material-icons right">arrow_forward</i>Next Year</a>
             </li>
             <li onclick="incrementMonth()" class="next">
-                <button type="button" id="myBtn4" style="background-color: floralwhite">Next Month</button>
+                <a class="waves-effect waves-purple blue-grey darken-2 btn">
+                    <i class="material-icons right">arrow_forward</i>Next Month</a>
             </li>
             <li id="month" style="text-align: center;"></li>
-            <li id="year" style="font-size: 16px; text-align: center;"></li>
+            <li id="year" style="font-size: 30px; text-align: center;"></li>
             <li id="reset" style="text-align: center;" onclick="resetToPresent()" class="reset">
-                <button type="button" id="resetButton">Reset to Present</button>
+                <a class="waves-effect light blue-darken-3 btn">Reset to Present</a>
             </li>
 
         </ul>
     </div>
+    <!--Days of the week-->
     <div id="day-bar">
         <div title="Off day">Sunday</div>
         <div>Monday</div>
@@ -57,6 +68,7 @@
     <ul class="days">
     </ul>
 
+    <!-- Add events to specific days-->
     <div id="event-form" class="inactive" style="top: 500; left: 500;">
         <h4>Add an event</h4>
         <p></p>
@@ -70,7 +82,16 @@
         </div>
         <button id="close-button" onclick="closeBox()">&#10005</button>
     </div>
-    <button type="button" id="resetCalendar" onclick="deleteEvents()">Reset Calendar</button>
+
+    <!--Calendar reset button-->
+    <div class="reset">
+        <ul>
+            <li id="resetCalendar" onclick="deleteEvents()">
+                <a class="waves-effect waves-purple blue-greu darken-2 btn-small">
+                    <i class="material-icons right"></i>Reset Calendar</a>
+            </li>
+        </ul>
+    </div>
     <form action="" method="">
         <div id="jsalarmclock">
             <div>
@@ -80,58 +101,39 @@
             <div>
                 <div class="leftcolumn" title="Real Time in EST">Hour:</div>
                 <span>
-                    <select class="alarmSelect"></select> Minutes</span>
+                    <select class="browser-default"></select>
+                </span>
+                <div class="leftcolumn" title="Real Time in EST">Minutes:</div>
                 <span>
-                    <select class="alarmSelect"></select> Seconds</span>
+                    <select class="browser-default"></select>
+                </span>
+                <div class="leftcolumn" title="Real Time in EST">Seconds:</div>
                 <span>
-                    <select class="alarmSelect"></select>
+                    <select class="browser-default"></select>
                 </span>
             </div>
             <input type="submit" value="Set Alarm!" id="submitbutton" />
             <input type="button" value="Reset" id="resetbutton" style="background-color:red" title="15 Sec alarm" />
         </div>
-
     </form>
-
-    <div style="background-color:gainsboro">
-        <button type="button" onclick="alert('Input data in the fields below')" style="background-color:darkorange" title="Double check your update and keep other users informed">Map and Message Section</button>
-    </div>
-
     <div class="container">
-        <div style="text-align:center">
-            <h2 title="You may notify team members via the fields below ">Contact Us</h2>
-            <p title="You may click the Google profile icon to notify updates via t2@team.com">Team Two member, or leave us a message:</p>
-        </div>
         <div class="row">
-            <div class="column">
-                <div class="mapouter" id="map" style="width:100%;height:500px">
+            <div class="col m4 pull-m1 left">
+                <div class="mapouter" id="map">
                     <div class="gmap_canvas">
-                        <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=furnace rd,alexandria&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                        <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=furnace rd,alexandria&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                     </div>
                 </div>
             </div>
-            <div class="column">
-                <form action="/action_page.php">
-                    <label for="fname">First Name</label>
-                    <input type="text" id="fname" name="firstname" placeholder="Enter your first name..">
-                    <label for="lname">Last Name</label>
-                    <input type="text" id="lname" name="lastname" placeholder="Enter your last name..">
-                    <label for="country">Country</label>
-                    <select id="country" name="country">
-                        <option value="australia">Australia</option>
-                        <option value="canada">Canada</option>
-                        <option value="usa">USA</option>
-                    </select>
-                    <label for="subject">Subject</label>
-                    <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
-                    <input type="submit" value="Submit">
-
-                </form>
+            <div class="col m5 right">
+                <img alt="" src="http://radar.weather.gov/Conus/Loop/NatLoop_Small.gif">
             </div>
+
         </div>
+
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .collapsible {
+      background-color: #777;
+      color: white;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+    }
+    .active,
+    .collapsible:hover {
+      background-color: #555;
+    }
+    .collapsible:after {
+      content: '\002B';
+      color: white;
+      font-weight: bold;
+      float: right;
+      margin-left: 5px;
+    }
+    .active:after {
+      content: "\2212";
+    }
+    .content {
+      padding: 0 18px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+      background-color: #f1f1f1;
+    }
+  </style>
+
+  <style>
+    .button {
+      background-color: gray;
+      border: none;
+      color: white;
+      padding: 6px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    .button5 {
+      border-radius: 50%;
+    }
+  </style>
+
+
+  <title>Weather Page</title>
+
+  <link type="text/css" rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="main.js"></script>
+  <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.0.8/stitch.js"></script>
+
+
+  <meta name="_csrf" th:content="${_csrf.token}" />
+  <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+</head>
+
+<body>
+  <h1>
+    <marquee direction="down">Weather and Navigation Page </marquee>
+  </h1>
+
+
+  <button class="button button5" onclick="location.href = 'index.html'; ">Back to Calendar </a>
+  </button>
+  <script>
+    function myFunction() {
+      document.getElementById("demo").innerHTML = href = "index.html" title = "link to weather site;
+    }
+  </script>
+  <!-- location for weather -->
+  <iframe style="display:block;" src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=small&timezone=America%2FNew_York"
+    height="90" frameborder="0"></iframe>
+  <p>
+    <b> Navigation</b>:</p>
+  <button class="collapsible">Help and About </button>
+  <div class="content">
+    <p>This calendar,.......
+      <br>
+      <button class="button button5" onclick="location.href = 'index.html'; ">Back to Calendar </a>
+      </button>
+    </p>
+  </div>
+  <button class="collapsible">Check Weather</button>
+  <div class="content">
+    <p>
+      <div style="width: 634px;" align="left">
+        <iframe style="display: block;" src="https://cdnres.willyweather.com/widget/loadView.html?id=92612" width="1200" height="92"
+          frameborder="0" scrolling="no" align="left"></iframe>
+        <a style="height: 92px;float: right;width: 20px;text-indent: -9999em;margin: -92px 0 0 0;z-index: 1;position: relative" href="https://www.willyweather.com/va/fairfax-county/lorton.html"
+          rel="nofollow" align="left">lorton VA weather forecast</a>
+      </div>
+      <button class="button button5" onclick="location.href = 'index.html'; ">Back to Calendar </a>
+      </button>
+    </p>
+  </div>
+  <button class="collapsible">Directions </button>
+  <div class="content">
+    <!-- google map display -->
+    <p>
+      <p class="center-align">
+        <iframe width="700" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=furnace rd,alexandria&t=&z=13&ie=UTF8&iwloc=&output=embed"
+          frameborder="0" scrolling="no" marginheight="0" marginwidth="0" align="left"></iframe>
+      </p>
+      <!-- location for weather -->
+      <div>
+        <a href="https://www.accuweather.com/en/us/alexandria-va/22314/weather-forecast/331249" class="aw-widget-legal" width="1200"
+          height="1500" align="left"></a>
+        <br>
+      </div>
+      <!-- US map display -->
+      <div class="col m5 right">
+        <img alt="" src="http://radar.weather.gov/Conus/Loop/NatLoop_Small.gif" width="700" height="500" align="right">
+      </div>
+      <button class="button button5" onclick="location.href = 'index.html'; ">Back to Calendar </a>
+      </button>
+      <!-- collapsible -->
+      <button class="collapsible">Check Weather</button>
+      <div class="content">
+        <p>
+          <!-- Temperature display -->
+          <div style="width: 634px;" align="left">
+            <iframe style="display: block;" src="https://cdnres.willyweather.com/widget/loadView.html?id=92612" width="1200" height="92"
+              frameborder="0" scrolling="no" align="left"></iframe>
+            <a style="height: 92px;float: right;width: 20px;text-indent: -9999em;margin: -92px 0 0 0;z-index: 1;position: relative" href="https://www.willyweather.com/va/fairfax-county/lorton.html"
+              rel="nofollow" align="left">lorton VA weather forecast</a>
+          </div>
+          <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+            for (i = 0; i < coll.length; i++) {
+              coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                  content.style.maxHeight = null;
+                } else {
+                  content.style.maxHeight = content.scrollHeight + "px";
+                }
+              });
+            }
+          </script>
+</body>
+</html>

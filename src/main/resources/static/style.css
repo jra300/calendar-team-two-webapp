@@ -1,6 +1,14 @@
 * {
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Roboto, Helvetica, sans-serif;
+}
+
+.nav-wrapper {
+    background-color: gray !important;
+}
+
+#logoutLink {
+    visibility: hidden;
 }
 
 #reset {
@@ -13,6 +21,37 @@
     width: 600px;
 }
 
+.blink {
+    animation: blink-animation 0.166s steps(5, start) infinite;
+    -webkit-animation: blink-animation 0.166s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+    to {
+      visibility: hidden;
+    }
+  }
+@-webkit-keyframes blink-animation {
+    to {
+      visibility: hidden;
+    }
+}
+
+#popupbox{
+    margin: 0; 
+    margin-left: 40%; 
+    margin-right: 40%;
+    margin-top: 50px; 
+    padding-top: 10px; 
+    width: 20%; 
+    height: 150px; 
+    position: absolute; 
+    background: #FBFBF0; 
+    border: solid #000000 2px; 
+    z-index: 9; 
+    font-family: arial; 
+    visibility: hidden; 
+}
+
 .gmap_canvas {
     overflow: hidden;
     background: none !important;
@@ -23,9 +62,8 @@
 #event-form {
     display: none;
     box-shadow: 0 2px 4px #3483;
-    position: fixed;
+    position: absolute;
     width: 300px;
-    transform: translate(-50%, -100%);
     z-index: 10;
     padding: 1rem;
     background-color: white;
@@ -105,8 +143,94 @@
     outline: none;
 }
 
+#edit-form {
+    display: none;
+    box-shadow: 0 2px 4px #3483;
+    position: absolute;
+    height: 300px;
+    width: 300px;
+    z-index: 10;
+    padding: 1rem;
+    background-color: white;
+    border: 1px #3483 solid;
+    flex-direction: column;
+    align-content: space-between;
+    overflow-y: auto;
+}
+
+#edit-form.active {
+    display: flex;
+}
+
+#edit-form h4 {
+    margin: 0 0 0.75rem 0;
+    color: gray;
+    font-weight: normal;
+    font-size: 1.15rem;
+}
+
+#edit-form p {
+    font-size: 0.85rem;
+    margin: 0 0 0.85rem 0;
+}
+
+#edit-form>* {
+    width: 100%;
+}
+
+#edit-form .text {
+    margin-bottom: 0.75rem;
+}
+
+#edit-form .text input[type=text] {
+    width: calc(100% - 0.75rem);
+    padding: 0.25rem;
+    font-size: 0.75rem;
+}
+
+#edit-form .buttons {
+    text-align: right;
+}
+
+#edit-form .buttons button {
+    padding: 0.5rem;
+    background-color: blue;
+    border: 1px solid gray;
+    font-weight: bold;
+    border-radius: 2px;
+    color: white;
+}
+
+#edit-form .buttons button:focus {
+    outline: none;
+}
+
+#edit-form .buttons button:hover {
+    background-color: #1414ff;
+    border: 1px solid blue;
+}
+
+#edit-form #close-button {
+    margin: 0;
+    padding: 0;
+    font-size: 1.25rem;
+    background-color: white;
+    position: absolute;
+    border: none;
+    width: 20px;
+    font-weight: bold;
+    color: #666;
+    right: 0.6rem;
+    top: 0.6rem;
+    cursor: pointer;
+}
+
+#edit-form #close-button:focus {
+    outline: none;
+}
+
 .header {
-    padding: 50px;
+    /* padding: 50px; */
     width: 100%;
 }
 
@@ -143,9 +267,6 @@ ul {
 .month .prev {
     float: left;
     padding: 10px;
-    if(month==December) {
-        style background-color: white;
-    }
 }
 
 .month .next {
@@ -240,7 +361,7 @@ input[type=submit]:hover {
 }
 
 #jsalarmclock {
-    font-family: Tahoma;
+    font-family: Helvetica;
     font-weight: bold;
     font-size: 15px;
     padding: 10px;
@@ -263,7 +384,7 @@ input[type=submit]:hover {
 }
 
 h1:hover {
-    color: blue;
+    color: rgb(72, 72, 119)
     /* outline: 1px solid red; */
 }
 

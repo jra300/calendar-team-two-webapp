@@ -16,6 +16,31 @@ public class CalendarController {
     public String calendar() {
         return "index";
     }
+    
+    @RequestMapping("/index.html")
+    public String index() {
+        return "index";
+    }
+    
+    @RequestMapping("/weather.html")
+    public String weather() {
+        return "weather";
+    }
+    
+    @RequestMapping("/face1.html")
+    public String face1() {
+        return "face1";
+    }
+    
+    @RequestMapping("/face2.html")
+    public String face2() {
+        return "face2";
+    }
+    
+    @RequestMapping("/settings.html")
+    public String settings() {
+        return "settings";
+    }
 
     @GetMapping("/logout")
     public String getLogoutPage(HttpServletRequest request, HttpServletResponse response) {

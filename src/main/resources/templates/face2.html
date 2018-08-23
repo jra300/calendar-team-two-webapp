@@ -3,24 +3,43 @@
 <html>
 
 <head>
-    <!--References for JS and CSS. 
+    <!--References for JS and CSS.
     Links to materialize -->
     <title>ITTP Team Two Calendar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.0.8/stitch.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment-holiday@1.5.1/build/moment-holiday-us.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script type="text/javascript" src="main.js"></script>
-    
     <link type="text/css" rel="stylesheet" href="style.css" />
-    <meta name="_csrf" th:content="${_csrf.token}" />
-    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+
+    <style>.month {
+        padding: 10px 10px;
+        width: 100%;
+        background-color: rgb(153, 0, 153);
+    }
+        .days li {
+            color: purple;
+        } 
+        html{
+            background-color: lavenderblush;
+                margin: auto;
+            padding: auto;
+        }
+        body{
+            border-bottom: 10px solid lightblue;
+            width: auto;
+            margin: 15 15 auto;
+            /*background-color: lavenderblush;*/
+        }
+    </style>
+
 
 </head>
 
@@ -30,32 +49,14 @@
             <div class="nav-wrapper">
                 <a href="#" class="brand-logo center">ITTP Team Two Calendar</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li>
-                        <a href="weather.html">
-                            <i title="Weather" class="material-icons">cloud</i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="badges.html">
-                            <i title="Map" class="material-icons">map</i>
-                        </a>
-                    </li>
-                    <li>
-                    <a href="settings.html">
-                            <i title="Settings" class="material-icons">settings</i>
-                        </a>
-                    </li>
+                    <li><a href="weather.html"><i title="Weather" class="material-icons">cloud</i></a></li>
+                    <li><a href="badges.html"><i title="Map" class="material-icons">map</i></a></li>
+                    <li><a href="settings.html"><i title="Settings" class="material-icons">settings</i></a></li>
                 </ul>
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li>
-                        <a class="waves-effect waves-purple blue-grey darken-2 btn" onclick="login()" id="loginLink">Login</a>
-                    </li>
-                    <li>
-                        <a class="waves-effect waves-purple blue-grey darken-2 btn" onclick="register()" id="registerLink">Register</a>
-                    </li>
-                    <li>
+                    <li> <a class="waves-effect waves-purple blue-grey darken-2 btn" onclick="login()" id="loginLink">Login</a>
                         <a class="waves-effect waves-purple blue-grey darken-2 btn" onclick="logout()" id="logoutLink">Logout</a>
-                    </li>
+                     </li>
                 </ul>
             </div>
         </nav>
@@ -107,17 +108,18 @@
         <p></p>
         <div class="text">
             Time:
-            <input id="apptTime" type="time" name="apptTime" value="" /> Description:
+            <input id="apptTime" type="time" name="apptTime" value="" />
+            Description:
             <input id="textInput" type="text" />
         </div>
         <div class="buttons">
             <button onclick="calendar.create()"> Create</button>
-            <button onclick="calendar.loadEventsToEdit()"> Edit</button>
+			<button onclick="calendar.loadEventsToEdit()"> Edit</button>
         </div>
         <button id="close-button" onclick="calendar.closeBox()">&#10005</button>
     </div>
 
-    <div id="edit-form" class="inactive" style="top: 500; left: 500;">
+	<div id="edit-form" class="inactive" style="top: 500; left: 500;">
         <h4>Edit an event</h4>
         <p></p>
         <div class="text">
